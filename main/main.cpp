@@ -36,6 +36,7 @@ int main(int argc, char *argv[])
     string firstName(strlen(argv[1])+1, ' ');
     string lastName(strlen(argv[2])+1, ' ');
 
+    // Проверим что строки больше 5x символом
     if(firstName.size() - 1 < 5) {
         cout << "error: size first name < 5" << endl;
         return 0;
