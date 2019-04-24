@@ -22,10 +22,10 @@ int main(int argc, char *argv[])
 
     cout << hex << endl;
     // Размер нашего украденного массива данных
-    constexpr int SizeData = sizeof(data);
+    constexpr int SizeData = sizeof(dataCrackme2);
     std::array<uint8_t, SizeData> a1{0};
     // Скопируем сырой массив в array
-    ::memcpy(a1.data(), data, SizeData);
+    ::memcpy(a1.data(), dataCrackme2, SizeData);
 
     char * ptrFirstName = &((char*)a1.data())[0x1d28];
     char * ptrLastName = &((char*)a1.data())[0x1d38];
@@ -35,6 +35,15 @@ int main(int argc, char *argv[])
 
     string firstName(strlen(argv[1])+1, ' ');
     string lastName(strlen(argv[2])+1, ' ');
+
+    if(firstName.size() - 1 < 5) {
+        cout << "error: size first name < 5" << endl;
+        return 0;
+    }
+    if(lastName.size() - 1  < 5) {
+        cout << "error: size last name < 5" << endl;
+        return 0;
+    }
     // Запишем в строку наши аргументы включая символ \0
     ::memcpy(&firstName[0], argv[1], firstName.size());
     ::memcpy(&lastName[0], argv[2], lastName.size());
