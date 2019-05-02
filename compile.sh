@@ -3,6 +3,8 @@
 function clean {
     rm -R -f debug
     rm -R -f release
+    rm -R -f relwithdebinfo
+    rm -R -f MinSizeRel
 }
 
 function build {
@@ -18,15 +20,22 @@ function build {
 if [ $# -eq 0 ]; then
     build Debug
     build Release
+    build relwithdebinfo
 elif [ "$1" = "clean" ]; then
     clean
 elif [ "$1" = "debug" ]; then
     build Debug
 elif [ "$1" = "release" ]; then
     build Release
+elif [ "$1" = "relwithdebinfo" ]; then
+    build RelWithDebInfo
+elif [ "$1" = "minsizerel" ]; then
+    build MinSizeRel
 elif [ "$1" = "all" ]; then
     build Debug
     build Release
+    build RelWithDebInfo
+    build MinSizeRel
 else
-    echo "build.sh <clean|all|debug|release|help>"
+    echo "compile.sh <clean|all|debug|release|relwithdebinfo|>"
 fi
